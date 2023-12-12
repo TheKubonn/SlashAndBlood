@@ -17,7 +17,7 @@ void AItem::BeginPlay()
 
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, FString("Item OnScreen Message!"));
+		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, FString("Hello World!"));
 	}
 
 	UE_LOG(LogTemp, Error, TEXT("Second UE_LOG output"));
