@@ -2,6 +2,7 @@
 
 
 #include "Items/Item.h"
+#include "DrawDebugHelpers.h"
 
 AItem::AItem()
 {
@@ -20,8 +21,12 @@ void AItem::BeginPlay()
 		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Blue, FString("Hello World!"));
 	}
 
-	UE_LOG(LogTemp, Error, TEXT("Second UE_LOG output"));
-	
+	UWorld* DebugWorld = GetWorld();
+
+	if (DebugWorld)
+	{
+		
+	}
 	
 }
 
