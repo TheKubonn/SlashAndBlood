@@ -2,6 +2,7 @@
 
 
 #include "Pawns/Bird.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 ABird::ABird()
@@ -12,7 +13,7 @@ ABird::ABird()
 	Capsule->SetCapsuleHalfHeight(20.f);
 	Capsule->SetCapsuleRadius(15.f);
 	SetRootComponent(Capsule);
-
+	
 }
 
 void ABird::BeginPlay()
