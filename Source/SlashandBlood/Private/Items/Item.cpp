@@ -9,6 +9,8 @@ AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMeshComponent"));
+	RootComponent = ItemMesh;
 }
 
 void AItem::BeginPlay()
@@ -46,11 +48,11 @@ void AItem::Tick(float DeltaTime)
 
 	// MovementRate * DeltaTime (cm/s) * (s/frame) = (cm/frame)
 	//AddActorWorldOffset(FVector(MovementRate * DeltaTime, 0.f, 0.f));
-	//AddActorWorldRotation(FRotator(0.f, RotationRate * DeltaTime, 0.f));
-	DRAW_SPHERE_SingleFrame(GetActorLocation());
-	DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100.f);
+	//AddActorWorldRotation(FRotator(0.f, 0.f, 200.f * DeltaTime));
+	//DRAW_SPHERE_SingleFrame(GetActorLocation());
+	//DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100.f);
 
-	FVector AvgVector = Avg<FVector>(GetActorLocation(), FVector::ZeroVector);
-	DRAW_POINT_SPHERE_SingleFrame(AvgVector);
+	//FVector AvgVector = Avg<FVector>(GetActorLocation(), FVector::ZeroVector);
+	//DRAW_POINT_SPHERE_SingleFrame(AvgVector);
 }
 
