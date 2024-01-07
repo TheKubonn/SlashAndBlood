@@ -55,6 +55,10 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ASlashCharacter::Turn);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ASlashCharacter::LookUp);
 
+	// When binding action, you have to choose either IE_Pressed or IE_Released
+	// Also ACharacter have a ready Jump function that is also available from Blueprints
+	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ACharacter::Jump);
+
 }
 
 void ASlashCharacter::MoveForward(float Value)
