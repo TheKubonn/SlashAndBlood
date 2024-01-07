@@ -50,8 +50,12 @@ void ASlashCharacter::MoveForward(float Value)
 	// Checking if the controller is not nullptr to prevent getting movement when pawn is not possessed
 	if ((Controller != nullptr) && (Value != 0.f))
 	{
-		FVector Forward = GetActorForwardVector();
-		AddMovementInput(Forward, Value);
+		// Looking for a forward direction of your mouse
+		const FRotator ControlRotation = GetControlRotation();
+		const FRotator YawRotation(0.f, ControlRotation.Yaw, 0.f);
+
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
 	}
 }
 
@@ -60,8 +64,12 @@ void ASlashCharacter::MoveRight(float Value)
 	// Checking if the controller is not nullptr to prevent getting movement when pawn is not possessed
 	if ((Controller != nullptr) && (Value != 0.f))
 	{
-		FVector Right = GetActorRightVector();
-		AddMovementInput(Right, Value);
+		// Looking for a right direction of your mouse
+		const FRotator ControlRotation = GetControlRotation();
+		const FRotator YawRotation(0.f, ControlRotation.Yaw, 0.f);
+
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
 	}
 }
 
