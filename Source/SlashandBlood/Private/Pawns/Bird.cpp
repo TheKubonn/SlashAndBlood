@@ -4,19 +4,32 @@
 #include "Pawns/Bird.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 
 // Sets default values
 ABird::ABird()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	// initializing capsule component to be our main root for bird pawn
 	Capsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
 	Capsule->SetCapsuleHalfHeight(20.f);
 	Capsule->SetCapsuleRadius(15.f);
 	SetRootComponent(Capsule);
 
+	// initializing skeletal mesh component and then attaching it to the root component
 	BirdMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BirdMesh"));
 	BirdMesh->SetupAttachment(GetRootComponent());
+
+	// initializing spring arm component and then attaching it to the root component, as well as changing it's target arm length
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArm->SetupAttachment(GetRootComponent());
+	SpringArm->TargetArmLength = 250.f;
+
+	// initializing camera component and then attaching it to the Spring Arm Component
+	ViewCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ViewCamera"));
+	ViewCamera->SetupAttachment(SpringArm);
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 	

@@ -8,6 +8,8 @@
 
 class UCapsuleComponent;
 class USkeletalMeshComponent;
+class USpringArmComponent;
+class UCameraComponent;
 
 UCLASS()
 class SLASHANDBLOOD_API ABird : public APawn
@@ -32,5 +34,11 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* BirdMesh;
+	
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArm;
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* ViewCamera;
 
 };
