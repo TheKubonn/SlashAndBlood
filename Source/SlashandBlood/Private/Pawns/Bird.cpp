@@ -31,6 +31,7 @@ ABird::ABird()
 	ViewCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ViewCamera"));
 	ViewCamera->SetupAttachment(SpringArm);
 
+	// This makes sure that every BP from this class will be auto possess on play
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 	
 }
@@ -72,6 +73,7 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	// initializing BindAxis that were set up in the engine
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ABird::MoveForward);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ABird::Turn);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ABird::LookUp);
