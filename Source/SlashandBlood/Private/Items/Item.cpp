@@ -3,6 +3,7 @@
 
 #include "Items/Item.h"
 #include "SlashandBlood/DebugMacros.h"
+#include "Components/SphereComponent.h"
 
 
 AItem::AItem()
@@ -11,6 +12,9 @@ AItem::AItem()
 
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMeshComponent"));
 	RootComponent = ItemMesh;
+
+	Sphere = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere"));
+	Sphere->SetupAttachment(GetRootComponent());
 }
 
 void AItem::BeginPlay()

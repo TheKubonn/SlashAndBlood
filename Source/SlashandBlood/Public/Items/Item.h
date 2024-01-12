@@ -21,6 +21,8 @@
 /* BlueprintCallable - Mo¿na wywo³aæ funkcje w BP */
 /* BlueprintPure - Mo¿na wywo³aæ funkcje w BP która tylko daje output value, nie zmienia niczego */
 
+class USphereComponent;
+
 UCLASS()
 class SLASHANDBLOOD_API AItem : public AActor
 {
@@ -54,6 +56,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* ItemMesh;
+
+	UPROPERTY(VisibleAnywhere)
+	USphereComponent* Sphere;
 
 };
 
