@@ -23,6 +23,12 @@
 
 class USphereComponent;
 
+enum class EItemState : uint8
+{
+	EIS_Hovering,
+	EIS_Equipped
+};
+
 UCLASS()
 class SLASHANDBLOOD_API AItem : public AActor
 {
@@ -42,7 +48,7 @@ protected:
 	float TimeConstant = 5.f;
 
 	UFUNCTION(BlueprintCallable)
-	float TransformedSin(float Value);
+	float TransformedSin();
 	
 	UFUNCTION(BlueprintPure)
 	float TransformedCosin();
@@ -58,6 +64,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* ItemMesh;
+
+	EItemState ItemState = EItemState::EIS_Hovering;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

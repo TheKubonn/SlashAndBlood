@@ -35,9 +35,9 @@ void AItem::BeginPlay()
 
 }
 
-float AItem::TransformedSin(float Value)
+float AItem::TransformedSin()
 {
-	return Amplitude * FMath::Sin(Value * TimeConstant);
+	return Amplitude * FMath::Sin(RunningTime * TimeConstant);
 }
 
 float AItem::TransformedCosin()
@@ -68,6 +68,11 @@ void AItem::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	RunningTime += DeltaTime;
+
+	if (ItemState == EItemState::EIS_Hovering)
+	{
+		AddActorWorldOffset(FVector(0.f, 0.f, TransformedSin()));
+	}
 
 	//float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant); // period of sine wave = 2*pi/K
 	//AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));

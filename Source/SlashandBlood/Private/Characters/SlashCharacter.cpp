@@ -68,6 +68,7 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 void ASlashCharacter::MoveForward(float Value)
 {
+	if (ActionState == EActionState::EAS_Attacking) return;
 	// Checking if the controller is not nullptr to prevent getting movement when pawn is not possessed
 	if ((Controller != nullptr) && (Value != 0.f))
 	{
@@ -82,6 +83,7 @@ void ASlashCharacter::MoveForward(float Value)
 
 void ASlashCharacter::MoveRight(float Value)
 {
+	if (ActionState == EActionState::EAS_Attacking) return;
 	// Checking if the controller is not nullptr to prevent getting movement when pawn is not possessed
 	if ((Controller != nullptr) && (Value != 0.f))
 	{
