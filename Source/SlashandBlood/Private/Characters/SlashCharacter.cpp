@@ -6,6 +6,8 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GroomComponent.h"
+#include "Items/Item.h"
+#include "Weapons/Weapon.h"
 
 ASlashCharacter::ASlashCharacter()
 {
@@ -58,6 +60,7 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	// When binding action, you have to choose either IE_Pressed or IE_Released
 	// Also ACharacter have a ready Jump function that is also available from Blueprints
 	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("Equip"), IE_Pressed, this, &ASlashCharacter::EKeyPressed);
 
 }
 
@@ -97,5 +100,14 @@ void ASlashCharacter::Turn(float Value)
 void ASlashCharacter::LookUp(float Value)
 {
 	AddControllerPitchInput(Value);
+}
+
+void ASlashCharacter::EKeyPressed()
+{
+	AWeapon* OverlappingWeapon = Cast<AWeapon>(OverlappingItem);
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->Equip(GetMesh(), FName("RightHandSocket"));
+	}
 }
 
