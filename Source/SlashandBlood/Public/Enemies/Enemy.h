@@ -9,6 +9,7 @@
 
 class UAnimMontage;
 class USoundBase;
+class UParticleSystem;
 
 UCLASS()
 class SLASHANDBLOOD_API AEnemy : public ACharacter, public IHitInterface
@@ -36,6 +37,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Sounds")
 	USoundBase* HitSound;
+
+	UPROPERTY(EditAnywhere, Category = "VisualEffects")
+	UParticleSystem* HitParticle;
 
 protected:
 	virtual void BeginPlay() override;
