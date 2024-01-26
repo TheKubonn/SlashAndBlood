@@ -10,6 +10,8 @@
 class UAnimMontage;
 class USoundBase;
 class UParticleSystem;
+class UAttributeComponent;
+class UWidgetComponent;
 
 UCLASS()
 class SLASHANDBLOOD_API AEnemy : public ACharacter, public IHitInterface
@@ -27,6 +29,11 @@ public:
 	void DirectionalHitReact(const FVector& ImpactPoint);
 
 private:
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UAttributeComponent> Attributes;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UWidgetComponent> HealthBarWidget;
 
 	/**
 	* Animation Montages

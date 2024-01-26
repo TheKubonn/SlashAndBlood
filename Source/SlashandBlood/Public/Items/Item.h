@@ -22,6 +22,7 @@
 /* BlueprintPure - Mo¿na wywo³aæ funkcje w BP która tylko daje output value, nie zmienia niczego */
 
 class USphereComponent;
+class UNiagaraComponent;
 
 enum class EItemState : uint8
 {
@@ -69,6 +70,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	USphereComponent* Sphere;
+
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<UNiagaraComponent> EmbersEffect;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
