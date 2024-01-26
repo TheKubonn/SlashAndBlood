@@ -38,6 +38,15 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr <UHealthBarComponent> HealthBarWidget;
 
+	UPROPERTY(EditAnywhere)
+	float LifeSpanTimer = 30.f;
+
+	UPROPERTY()
+	TObjectPtr <AActor> CombatTarget;
+
+	UPROPERTY(EditAnywhere)
+	double CombatRadius = 700.f;
+
 	/**
 	* Animation Montages
 	**/
