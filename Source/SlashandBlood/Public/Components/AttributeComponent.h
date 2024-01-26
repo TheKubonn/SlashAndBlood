@@ -27,4 +27,9 @@ private:
 	// Maximum Health of our character
 	UPROPERTY(EditAnywhere, Category = "Actor Attributes")
 	float MaxHealth;
+
+public:
+	void ReceiveDamage(float Damage);
+	float GetHealthPercent();
+	bool IsAlive();
 };

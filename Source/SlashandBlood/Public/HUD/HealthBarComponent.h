@@ -6,6 +6,8 @@
 #include "Components/WidgetComponent.h"
 #include "HealthBarComponent.generated.h"
 
+class UHealthBar;
+
 /**
  * 
  */
@@ -14,4 +16,10 @@ class SLASHANDBLOOD_API UHealthBarComponent : public UWidgetComponent
 {
 	GENERATED_BODY()
 	
+public:
+	void SetHealthPercent(float Percent);
+
+private:
+	UPROPERTY()
+	TObjectPtr <UHealthBar> HealthBarWidget;
 };
