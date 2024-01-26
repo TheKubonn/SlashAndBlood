@@ -8,6 +8,9 @@
 #include "BreakableActor.generated.h"
 
 class UGeometryCollectionComponent;
+class ATreasure;
+class UCapsuleComponent;
+
 
 UCLASS()
 class SLASHANDBLOOD_API ABreakableActor : public AActor, public IHitInterface
@@ -23,9 +26,15 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-private:
-	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UGeometryCollectionComponent> GeometryCollection;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TObjectPtr<UCapsuleComponent> Capsule;
+
+private:
+
+	UPROPERTY(EditAnywhere, Category = "Breakable Properties")
+	TSubclassOf<ATreasure> TreasureClass;
 
 };
