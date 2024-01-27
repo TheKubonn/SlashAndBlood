@@ -13,6 +13,7 @@ class USoundBase;
 class UParticleSystem;
 class UAttributeComponent;
 class UHealthBarComponent;
+class AAIController;
 
 UCLASS()
 class SLASHANDBLOOD_API AEnemy : public ACharacter, public IHitInterface
@@ -46,6 +47,20 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	double CombatRadius = 700.f;
+
+	/**
+	* Navigation
+	**/
+
+	UPROPERTY()
+	TObjectPtr <AAIController> EnemyController;
+
+	// Current Patrol Target
+	UPROPERTY(EditInstanceOnly, Category = "AI Navigation")
+	TObjectPtr <AActor> PatrolTarget;
+
+	UPROPERTY(EditInstanceOnly, Category = "AI Navigation")
+	TArray <TObjectPtr<AActor>> PatrolTargets;
 
 	/**
 	* Animation Montages
