@@ -22,7 +22,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	void CheckPatrolTarget();
 	void CheckCombatTarget();
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	// virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void GetHit_Implementation(const FVector& ImpactPoint) override;
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 	virtual void Destroyed() override;
@@ -35,8 +35,8 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr <UPawnSensingComponent> PawnSensing;
 
-	UPROPERTY(EditAnywhere)
-	float LifeSpanTimer = 30.f;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float LifeSpanTimer = 10.f;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf <class AWeapon> WeaponClass;
@@ -75,16 +75,53 @@ private:
 	UPROPERTY(EditAnywhere, Category = "AI Navigation")
 	float WaitMax = 10.f;
 
-	EEnemyState EnemyState = EEnemyState::EES_Patrolling;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float PatrollingSpeed = 125.f;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float ChasingSpeed = 300.f;
+
+	/**
+	* AI Behaviour
+	**/
+
+	void HideHealthBar();
+	void ShowHealthBar();
+	void LoseInterest();
+	void StartPatrolling();
+	void ChaseTarget();
+	void ClearPatrolTimer();
+	bool IsOutsideCombatRadius();
+	bool IsOutsideAttackRadius();
+	bool IsInsideAttackRadius();
+	bool IsChasing();
+	bool IsAttacking();
+	bool IsDead();
+	bool IsEngaged();
+
+	/**
+	* Combat Behaviour
+	**/
+	void StartAttackTimer();
+	void ClearAttackTimer();
+
+	FTimerHandle AttackTimer;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float AttackMin = 0.5f;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float AttackMax = 1.f;
 
 protected:
 	virtual void BeginPlay() override;
-
 	virtual void Die() override;
-
 	bool InTargetRange(TObjectPtr<AActor> Target, double Radius);
-
 	void MoveToTarget(TObjectPtr <AActor> Target);
+	virtual void Attack() override;
+	virtual bool CanAttack() override;
+	virtual void HandleDamage(float DamageAmount) override;
+	virtual int32 PlayDeathMontage() override;
 
 	TObjectPtr <AActor> ChoosePatrolTarget();
 
@@ -92,7 +129,10 @@ protected:
 	void PawnSeen(APawn* SeenPawn);
 
 	UPROPERTY(BlueprintReadOnly)
-	EDeathPose DeathPose = EDeathPose::EDP_Alive;
+	TEnumAsByte <EDeathPose> DeathPose;
+
+	UPROPERTY(BlueprintReadOnly)
+	EEnemyState EnemyState = EEnemyState::EES_Patrolling;
 
 public:	
 
