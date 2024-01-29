@@ -36,18 +36,14 @@ protected:
 	void LookUp(float Value);
 	void EKeyPressed();
 	virtual void Attack() override;
-	
-	/**
-	*	Play Montage Functions
-	*/
-	
+
+	// Combat related
 	virtual void AttackEnd() override;
-
 	virtual bool CanAttack() override;
-
-	void PlayEquipMontage(const FName& SectionName);
 	bool CanDisarm();
 	bool CanArm();
+	void PlayEquipMontage(const FName& SectionName);
+
 
 	UFUNCTION(BlueprintCallable)
 	void Disarm();
