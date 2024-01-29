@@ -21,7 +21,6 @@ class SLASHANDBLOOD_API ASlashCharacter : public ABaseCharacter
 public:
 	ASlashCharacter();
 
-	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
@@ -38,24 +37,28 @@ protected:
 	virtual void Attack() override;
 
 	// Combat related
+	void EquipWeapon(TObjectPtr <AWeapon> Weapon);
 	virtual void AttackEnd() override;
 	virtual bool CanAttack() override;
 	bool CanDisarm();
 	bool CanArm();
+	void Disarm();
+	void Arm();
 	void PlayEquipMontage(const FName& SectionName);
 
 
 	UFUNCTION(BlueprintCallable)
-	void Disarm();
+	void AttachWeaponToBack();
 	
 	UFUNCTION(BlueprintCallable)
-	void Arm();
+	void AttachWeaponToHand();
 
 	UFUNCTION(BlueprintCallable)
 	void FinishEquipping();
 
 private:
 
+	/* Character components */
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
 	
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
