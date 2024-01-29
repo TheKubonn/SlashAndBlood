@@ -120,7 +120,7 @@ bool AEnemy::IsEngaged()
 
 bool AEnemy::CanAttack()
 {
-	bool bCanAttack = IsInsideAttackRadius() && !IsAttacking() && !IsDead();
+	bool bCanAttack = IsInsideAttackRadius() && !IsAttacking() && !IsEngaged() && !IsDead();
 	return bCanAttack;
 }
 
@@ -143,6 +143,13 @@ int32 AEnemy::PlayDeathMontage()
 		DeathPose = Pose;
 	}
 	return Selection;
+}
+
+void AEnemy::AttackEnd()
+{
+	EnemyState = EEnemyState::EES_NoState;
+	CheckCombatTarget();
+
 }
 
 void AEnemy::StartAttackTimer()
@@ -212,6 +219,7 @@ void AEnemy::MoveToTarget(TObjectPtr<AActor> Target)
 
 void AEnemy::Attack()
 {
+	EnemyState = EEnemyState::EES_Engaged;
 	Super::Attack();
 	PlayAttackMontage();
 }
